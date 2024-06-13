@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +9,29 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Basic Concepts of WEB-INF - JPMC Demo</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">JPMC Demo</a>
-                </div>
+                <a class="navbar-brand" href="..">JPMC Demo</a>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -50,16 +41,41 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#webxml-file">'web.xml' File</a></li>
-        <li class="main "><a href="#spring-configuration-files">Spring Configuration Files</a></li>
-        <li class="main "><a href="#flow-definitions">Flow Definitions</a></li>
-        <li class="main "><a href="#jsp-view-templates">JSP View Templates</a></li>
-            <li><a href="#embeddedflowcontainer-endpoint">/embeddedFlowContainer Endpoint</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#webxml-file" class="nav-link">'web.xml' File</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-configuration-files" class="nav-link">Spring Configuration Files</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#flow-definitions" class="nav-link">Flow Definitions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#jsp-view-templates" class="nav-link">JSP View Templates</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <p>The <code>WEB-INF</code> directory in a Java web application is a location for resources such as configuration files, JSP files, and libraries. It is a secure directory because its contents are not directly accessible from the browser.</p>
 <p>In the <code>webflow-showcase</code> application, the <code>WEB-INF</code> directory contains the <code>web.xml</code> file, which is the deployment descriptor for the application. It configures the <code>DispatcherServlet</code> that handles incoming requests.</p>
@@ -69,7 +85,7 @@
 <hr />
 <h1 id="webxml-file">'web.xml' File</h1>
 <p>The 'web.xml' file is the deployment descriptor of the application. It defines the servlet mapping for the 'DispatcherServlet', which is the entry point for handling requests in Spring MVC applications.</p>
-<pre><code class="xml">&lt;web-app xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+<pre><code class="language-xml">&lt;web-app xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
          xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;
          version=&quot;3.0&quot;&gt;
@@ -91,41 +107,39 @@
 
 &lt;/web-app&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/spring/servlet-context.xml" line="6"></p>
 <hr />
 <h1 id="spring-configuration-files">Spring Configuration Files</h1>
 <p>The 'servlet-context.xml' file is one of the Spring configuration files. It is specified as the 'contextConfigLocation' parameter in the 'web.xml' file. This file typically contains beans definitions that are specific to the web layer of the application.</p>
-<pre><code class="xml">    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+<pre><code class="language-xml">    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
 
     &lt;!--
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/flows/embedded-flow/flow.xml" line="4"></p>
 <hr />
 <h1 id="flow-definitions">Flow Definitions</h1>
 <p>The 'flow.xml' files define the flows for the Spring Web Flow. Each flow is a module of the application that encapsulates a sequence of steps that guide the user through a controlled navigation.</p>
-<pre><code class="xml">    xsi:schemaLocation=&quot;
+<pre><code class="language-xml">    xsi:schemaLocation=&quot;
         http://www.springframework.org/schema/webflow 
         https://www.springframework.org/schema/webflow/spring-webflow.xsd&quot;&gt;
 
     &lt;view-state id=&quot;step1&quot; view=&quot;embeddedFlow/step1&quot;&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/views/home.jsp" line="1"></p>
 <hr />
 <h1 id="jsp-view-templates">JSP View Templates</h1>
 <p>The JSP files in the 'views' directory are the view templates of the application. They define the presentation of the data that is sent to the client.</p>
-<p>```java server pages
-<div></p>
+<p>```java server pages</p>
+<div>
+
 <pre><code>
 ---
 
@@ -147,62 +161,74 @@ The root endpoint (/) is mapped to the 'home' view. This means when a user navig
     &lt;mvc:view-controller path=&quot;/&quot; view-name=&quot;home&quot; /&gt;
 </code></pre>
 
-<hr />
-<p></SwmSnippet></p>
-<p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="16"></p>
-<hr />
-<h2 id="embeddedflowcontainer-endpoint">/embeddedFlowContainer Endpoint</h2>
-<p>The /embeddedFlowContainer endpoint is not mapped to a specific view. This suggests that the endpoint is handled by a controller method, which would determine the appropriate view to return.</p>
-<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/embeddedFlowContainer&quot; /&gt;
+
+---
+
+</SwmSnippet>
+
+<SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="16">
+
+---
+
+## /embeddedFlowContainer Endpoint
+
+The /embeddedFlowContainer endpoint is not mapped to a specific view. This suggests that the endpoint is handled by a controller method, which would determine the appropriate view to return.
+
+
+<pre><code class="language-xml">    &lt;mvc:view-controller path=&quot;/embeddedFlowContainer&quot; /&gt;
 </code></pre>
 
-<hr />
-<p></SwmSnippet></p>
-<p>&nbsp;</p>
-<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
-<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+
+---
+
+</SwmSnippet>
+
+&nbsp;
+
+*This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human*
+
+<SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by [Swimm](/)</sup></SwmMeta></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

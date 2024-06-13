@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +9,29 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Introduction to Webflow Showcase - JPMC Demo</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">JPMC Demo</a>
-                </div>
+                <a class="navbar-brand" href="..">JPMC Demo</a>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -50,22 +41,46 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#project-configuration">Project Configuration</a></li>
-        <li class="main "><a href="#webflow-showcase-endpoints">Webflow Showcase Endpoints</a></li>
-            <li><a href="#root-endpoint">Root Endpoint (/)</a></li>
-            <li><a href="#embedded-flow-container-endpoint-embeddedflowcontainer">Embedded Flow Container Endpoint (/embeddedFlowContainer)</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#project-configuration" class="nav-link">Project Configuration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#webflow-showcase-endpoints" class="nav-link">Webflow Showcase Endpoints</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#root-endpoint" class="nav-link">Root Endpoint (/)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#embedded-flow-container-endpoint-embeddedflowcontainer" class="nav-link">Embedded Flow Container Endpoint (/embeddedFlowContainer)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <p>Webflow showcase is a project within the Spring Web Flow samples. It's a Maven project, as indicated by the pom.xml file, and it's packaged as a war file. This project is designed to demonstrate the capabilities of Spring Web Flow, a framework for building web applications in Spring. It includes dependencies on various Spring modules, such as spring-webmvc, spring-jdbc, and spring-orm, as well as on Spring Web Flow itself. The project also uses Apache Tiles for layout, Hibernate Validator for JSR 303 validation, and Log4j for logging.</p>
 <p><SwmSnippet path="/webflow-showcase/pom.xml" line="1"></p>
 <hr />
 <h1 id="project-configuration">Project Configuration</h1>
 <p>This is the Maven Project Object Model (POM) for the Webflow showcase. It defines the project structure, dependencies, and build configuration. Key dependencies include Spring Web MVC, Spring JDBC, Spring ORM, and Spring Web Flow. The build section specifies the use of the Maven Compiler Plugin and the Jetty Maven Plugin.</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
          xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -87,7 +102,6 @@
             &lt;groupId&gt;org.springframework&lt;/groupId&gt;
             &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <h1 id="webflow-showcase-endpoints">Webflow Showcase Endpoints</h1>
@@ -96,65 +110,62 @@
 <hr />
 <h2 id="root-endpoint">Root Endpoint (/)</h2>
 <p>The root endpoint (/) is mapped directly to the 'home' view without any controller processing. This means when the application is accessed from the root URL, the 'home' view is returned to the client.</p>
-<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/&quot; view-name=&quot;home&quot; /&gt;
+<pre><code class="language-xml">    &lt;mvc:view-controller path=&quot;/&quot; view-name=&quot;home&quot; /&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="16"></p>
 <hr />
 <h2 id="embedded-flow-container-endpoint-embeddedflowcontainer">Embedded Flow Container Endpoint (/embeddedFlowContainer)</h2>
 <p>The /embeddedFlowContainer endpoint is also mapped directly to a view with the same name. This endpoint is used to access the 'embeddedFlowContainer' view.</p>
-<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/embeddedFlowContainer&quot; /&gt;
+<pre><code class="language-xml">    &lt;mvc:view-controller path=&quot;/embeddedFlowContainer&quot; /&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p>&nbsp;</p>
 <p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
 <p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

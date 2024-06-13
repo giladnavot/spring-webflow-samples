@@ -1,68 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Web Flow Handling Process - JPMC Demo</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
-
-    <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">JPMC Demo</a>
-                </div>
-
-                <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
+<html data-bs-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>Web Flow Handling Process - JPMC Demo</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../css/fontawesome.min.css" rel="stylesheet"/>
+<link href="../css/brands.min.css" rel="stylesheet"/>
+<link href="../css/solid.min.css" rel="stylesheet"/>
+<link href="../css/v4-font-face.min.css" rel="stylesheet"/>
+<link href="../css/base.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" id="hljs-light" rel="stylesheet"/>
+<link disabled="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" id="hljs-dark" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+<div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+<div class="container">
+<a class="navbar-brand" href="..">JPMC Demo</a>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse" id="navbar-collapse">
+<ul class="nav navbar-nav ms-md-auto">
+<li class="nav-item">
+<a class="nav-link" data-bs-target="#mkdocs_search_modal" data-bs-toggle="modal" href="#">
+<i class="fa fa-search"></i> Search
                             </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#initializing-the-flow-executor">Initializing the flow executor</a></li>
-        <li class="main "><a href="#registering-the-flow">Registering the flow</a></li>
-        <li class="main "><a href="#building-the-flow-services">Building the flow services</a></li>
-        <li class="main "><a href="#creating-the-mvc-view-factory">Creating the MVC view factory</a></li>
-        <li class="main "><a href="#resolving-the-thymeleaf-view">Resolving the Thymeleaf view</a></li>
-        <li class="main "><a href="#setting-up-the-template-engine">Setting up the template engine</a></li>
-        <li class="main "><a href="#resolving-the-template">Resolving the template</a></li>
-    </ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+<div class="navbar-header">
+<button class="navbar-toggler collapsed" data-bs-target="#toc-collapse" data-bs-toggle="collapse" title="Table of Contents" type="button">
+<span class="fa fa-angle-down"></span>
+</button>
+</div>
+<div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#initializing-the-flow-executor">Initializing the flow executor</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#registering-the-flow">Registering the flow</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#building-the-flow-services">Building the flow services</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#creating-the-mvc-view-factory">Creating the MVC view factory</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#resolving-the-thymeleaf-view">Resolving the Thymeleaf view</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#setting-up-the-template-engine">Setting up the template engine</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#resolving-the-template">Resolving the template</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</div>
 </div></div>
-                <div class="col-md-9" role="main">
-
+<div class="col-md-9" role="main">
 <p>This document will cover the process of handling web flow in the Spring Web Flow project, which includes:</p>
 <ol>
 <li>Initializing the flow executor</li>
@@ -73,7 +86,7 @@
 <li>Setting up the template engine</li>
 <li>Resolving the template</li>
 </ol>
-<pre><code class="mermaid">graph TD;
+<div class="mermaid">graph TD;
 subgraph booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config
   flowHandlerAdapter:::mainFlowStyle --&gt; flowExecutor
 end
@@ -102,41 +115,38 @@ classDef rootsStyle color:#000000,fill:#00FFF4
 classDef Style1 color:#000000,fill:#00FFAA
 classDef Style2 color:#000000,fill:#FFFF00
 classDef Style3 color:#000000,fill:#AA7CB9
-</code></pre>
-
-<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" line="22" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
-<hr />
+</div>
+<p><swmsnippet line="22" path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></swmsnippet></p>
+<hr/>
 <h1 id="initializing-the-flow-executor">Initializing the flow executor</h1>
 <p>The <code>flowExecutor</code> method initializes the flow executor. It adds a <code>SecurityFlowExecutionListener</code> to the flow executor for all flows, denoted by '*'</p>
-<pre><code class="java">    @Bean
+<pre><code class="language-java">    @Bean
     public FlowExecutor flowExecutor() {
         return getFlowExecutorBuilder(flowRegistry())
-                .addFlowExecutionListener(new SecurityFlowExecutionListener(), &quot;*&quot;)
+                .addFlowExecutionListener(new SecurityFlowExecutionListener(), "*")
                 .build();
     }
 </code></pre>
-
-<hr />
-<p></SwmSnippet></p>
-<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" line="29" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
-<hr />
+<hr/>
+<p></p>
+<p><swmsnippet line="29" path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></swmsnippet></p>
+<hr/>
 <h1 id="registering-the-flow">Registering the flow</h1>
 <p>The <code>flowRegistry</code> method registers the flow. It sets the base path to '/WEB-INF' and adds a flow location pattern to match all XML files ending with '-flow.xml'</p>
-<pre><code class="java">    @Bean
+<pre><code class="language-java">    @Bean
     public FlowDefinitionRegistry flowRegistry() {
         return getFlowDefinitionRegistryBuilder(flowBuilderServices())
-                .setBasePath(&quot;/WEB-INF&quot;)
-                .addFlowLocationPattern(&quot;/**/*-flow.xml&quot;).build();
+                .setBasePath("/WEB-INF")
+                .addFlowLocationPattern("/**/*-flow.xml").build();
     }
 </code></pre>
-
-<hr />
-<p></SwmSnippet></p>
-<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" line="36" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
-<hr />
+<hr/>
+<p></p>
+<p><swmsnippet line="36" path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></swmsnippet></p>
+<hr/>
 <h1 id="building-the-flow-services">Building the flow services</h1>
 <p>The <code>flowBuilderServices</code> method builds the flow services. It sets the view factory creator and the validator, and enables the development mode</p>
-<pre><code class="java">    @Bean
+<pre><code class="language-java">    @Bean
     public FlowBuilderServices flowBuilderServices() {
         return getFlowBuilderServicesBuilder()
                 .setViewFactoryCreator(mvcViewFactoryCreator())
@@ -145,14 +155,13 @@ classDef Style3 color:#000000,fill:#AA7CB9
                 .build();
     }
 </code></pre>
-
-<hr />
-<p></SwmSnippet></p>
-<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" line="45" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
-<hr />
+<hr/>
+<p></p>
+<p><swmsnippet line="45" path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebFlowConfig.java" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></swmsnippet></p>
+<hr/>
 <h1 id="creating-the-mvc-view-factory">Creating the MVC view factory</h1>
 <p>The <code>mvcViewFactoryCreator</code> method creates the MVC view factory. It sets the view resolvers and enables the use of Spring bean binding</p>
-<pre><code class="java">    @Bean
+<pre><code class="language-java">    @Bean
     public MvcViewFactoryCreator mvcViewFactoryCreator() {
         MvcViewFactoryCreator factoryCreator = new MvcViewFactoryCreator();
         factoryCreator.setViewResolvers(Collections.singletonList(this.webMvcConfig.thymeleafViewResolver()));
@@ -160,14 +169,13 @@ classDef Style3 color:#000000,fill:#AA7CB9
         return factoryCreator;
     }
 </code></pre>
-
-<hr />
-<p></SwmSnippet></p>
-<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebMvcConfig.java" line="81" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
-<hr />
+<hr/>
+<p></p>
+<p><swmsnippet line="81" path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebMvcConfig.java" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></swmsnippet></p>
+<hr/>
 <h1 id="resolving-the-thymeleaf-view">Resolving the Thymeleaf view</h1>
 <p>The <code>thymeleafViewResolver</code> method resolves the Thymeleaf view. It sets the view class and the template engine</p>
-<pre><code class="java">    @Bean
+<pre><code class="language-java">    @Bean
     public AjaxThymeleafViewResolver thymeleafViewResolver() {
         AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
         viewResolver.setViewClass(FlowAjaxThymeleafView.class);
@@ -175,14 +183,13 @@ classDef Style3 color:#000000,fill:#AA7CB9
         return viewResolver;
     }
 </code></pre>
-
-<hr />
-<p></SwmSnippet></p>
-<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebMvcConfig.java" line="89" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
-<hr />
+<hr/>
+<p></p>
+<p><swmsnippet line="89" path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebMvcConfig.java" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></swmsnippet></p>
+<hr/>
 <h1 id="setting-up-the-template-engine">Setting up the template engine</h1>
 <p>The <code>templateEngine</code> method sets up the template engine. It adds a new <code>SpringSecurityDialect</code>, sets the template resolver, and adds additional dialects</p>
-<pre><code class="java">    @Bean
+<pre><code class="language-java">    @Bean
     public SpringTemplateEngine templateEngine(){
 
         Set&lt;IDialect&gt; dialects = new LinkedHashSet&lt;&gt;();
@@ -194,105 +201,100 @@ classDef Style3 color:#000000,fill:#AA7CB9
         return templateEngine;
     }
 </code></pre>
-
-<hr />
-<p></SwmSnippet></p>
-<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebMvcConfig.java" line="101" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
-<hr />
+<hr/>
+<p></p>
+<p><swmsnippet line="101" path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/config/WebMvcConfig.java" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></swmsnippet></p>
+<hr/>
 <h1 id="resolving-the-template">Resolving the template</h1>
 <p>The <code>templateResolver</code> method resolves the template. It builds a web application, sets the prefix and suffix, and sets the template mode to 'HTML5'</p>
-<pre><code class="java">    @Bean
+<pre><code class="language-java">    @Bean
     public WebApplicationTemplateResolver templateResolver() {
         IWebApplication application = JakartaServletWebApplication.buildApplication(this.servletContext);
         WebApplicationTemplateResolver resolver = new WebApplicationTemplateResolver(application);
-        resolver.setPrefix(&quot;/WEB-INF/&quot;);
-        resolver.setSuffix(&quot;.html&quot;);
-        resolver.setTemplateMode(&quot;HTML5&quot;);
+        resolver.setPrefix("/WEB-INF/");
+        resolver.setSuffix(".html");
+        resolver.setTemplateMode("HTML5");
         return resolver;
     }
 </code></pre>
-
-<hr />
-<p></SwmSnippet></p>
-<p>&nbsp;</p>
+<hr/>
+<p></p>
+<p> </p>
 <p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
-<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="https://app.swimm.io/">Swimm</a></sup></SwmMeta></p></div>
-        </div>
-
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
-        </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+<p><swmmeta repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples" version="3.0.0"><sup>Powered by <a href="https://app.swimm.io/">Swimm</a></sup></swmmeta></p></div>
 </div>
-
-    </body>
+</div>
+<footer class="col-md-12">
+<hr/>
+<p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+</footer>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+<script src="../js/base.js"></script>
+<script src="../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<p>From here you can search these documents. Enter your search terms below.</p>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="search"/>
+</div>
+</form>
+<div data-no-results-text="No results found" id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>

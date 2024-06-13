@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +9,29 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Building the PrimeFaces Showcase with Maven - JPMC Demo</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">JPMC Demo</a>
-                </div>
+                <a class="navbar-brand" href="..">JPMC Demo</a>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -50,22 +41,48 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#project-information">Project Information</a></li>
-        <li class="main "><a href="#parent-project">Parent Project</a></li>
-        <li class="main "><a href="#dependencies">Dependencies</a></li>
-        <li class="main "><a href="#build-configuration">Build Configuration</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#project-information" class="nav-link">Project Information</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#parent-project" class="nav-link">Parent Project</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#dependencies" class="nav-link">Dependencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#build-configuration" class="nav-link">Build Configuration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <p>This document provides a detailed walkthrough of how Maven is used in the PrimeFaces Showcase project, focusing on the configuration and dependencies defined in the <code>pom.xml</code> file.</p>
 <p><SwmSnippet path="/primefaces-showcase/pom.xml" line="1"></p>
 <hr />
 <h1 id="project-information">Project Information</h1>
 <p>The <code>pom.xml</code> file starts with the project information. The <code>modelVersion</code> is set to <code>4.0.0</code>, which is the standard for Maven 2 and later. The <code>groupId</code> is <code>org.springframework.webflow.samples</code>, and the <code>artifactId</code> is <code>primefaces-showcase</code>. The <code>packaging</code> type is <code>war</code>, indicating that the project will be packaged as a Web Application Archive (WAR) file.</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
          xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -75,27 +92,25 @@
     &lt;packaging&gt;war&lt;/packaging&gt;
     &lt;version&gt;1.0.0-BUILD-SNAPSHOT&lt;/version&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/pom.xml" line="11"></p>
 <hr />
 <h1 id="parent-project">Parent Project</h1>
 <p>The <code>parent</code> element specifies the parent project from which this project inherits. The parent project is <code>spring-webflow-samples</code> from the <code>org.springframework.webflow</code> group.</p>
-<pre><code class="xml">    &lt;parent&gt;
+<pre><code class="language-xml">    &lt;parent&gt;
         &lt;groupId&gt;org.springframework.webflow&lt;/groupId&gt;
         &lt;artifactId&gt;spring-webflow-samples&lt;/artifactId&gt;
         &lt;version&gt;1.0.0.BUILD-SNAPSHOT&lt;/version&gt;
     &lt;/parent&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/pom.xml" line="17"></p>
 <hr />
 <h1 id="dependencies">Dependencies</h1>
 <p>The <code>dependencies</code> section lists all the dependencies required by the project. These include various Spring, Servlet, JSF, PrimeFaces, and logging libraries. Each dependency is specified with a <code>groupId</code>, <code>artifactId</code>, and <code>version</code>.</p>
-<pre><code class="xml">    &lt;dependencies&gt;
+<pre><code class="language-xml">    &lt;dependencies&gt;
         &lt;!-- Spring --&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.springframework&lt;/groupId&gt;
@@ -117,14 +132,13 @@
             &lt;version&gt;${webflow.version}&lt;/version&gt;
         &lt;/dependency&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/pom.xml" line="125"></p>
 <hr />
 <h1 id="build-configuration">Build Configuration</h1>
 <p>The <code>build</code> section configures aspects related to the build process. The <code>finalName</code> is set to <code>primefaces-showcase</code>, which will be the name of the generated WAR file. The <code>plugins</code> section includes the <code>maven-compiler-plugin</code> for compiling the source code and the <code>jetty-maven-plugin</code> for running the application on Jetty server.</p>
-<pre><code class="xml">    &lt;build&gt;
+<pre><code class="language-xml">    &lt;build&gt;
         &lt;finalName&gt;primefaces-showcase&lt;/finalName&gt;
         &lt;plugins&gt;
             &lt;plugin&gt;
@@ -146,54 +160,52 @@
                     &lt;/webApp&gt;
                 &lt;/configuration&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p>&nbsp;</p>
 <p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
 <p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

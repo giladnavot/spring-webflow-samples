@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +9,29 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Understanding Webflow in Spring Framework - JPMC Demo</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">JPMC Demo</a>
-                </div>
+                <a class="navbar-brand" href="..">JPMC Demo</a>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -50,67 +41,109 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#webflow-with-jsf">Webflow with JSF</a></li>
-        <li class="main "><a href="#webflow-with-ajax">Webflow with Ajax</a></li>
-        <li class="main "><a href="#webflow-with-file-upload">Webflow with File Upload</a></li>
-        <li class="main "><a href="#webflow-with-validation">Webflow with Validation</a></li>
-        <li class="main "><a href="#spring-web-flow-functionalities">Spring Web Flow Functionalities</a></li>
-            <li><a href="#userbean-class">UserBean Class</a></li>
-            <li><a href="#person-class">Person Class</a></li>
-            <li><a href="#reservation-class">Reservation Class</a></li>
-            <li><a href="#account-class">Account Class</a></li>
-            <li><a href="#formbean-class">FormBean Class</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#webflow-with-jsf" class="nav-link">Webflow with JSF</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#webflow-with-ajax" class="nav-link">Webflow with Ajax</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#webflow-with-file-upload" class="nav-link">Webflow with File Upload</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#webflow-with-validation" class="nav-link">Webflow with Validation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-web-flow-functionalities" class="nav-link">Spring Web Flow Functionalities</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#userbean-class" class="nav-link">UserBean Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#person-class" class="nav-link">Person Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#reservation-class" class="nav-link">Reservation Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#account-class" class="nav-link">Account Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#formbean-class" class="nav-link">FormBean Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <p>Webflow in the context of the spring-webflow-samples repository refers to the Spring Web Flow framework. This framework is designed to help developers build web applications that follow a 'flow' of interactions. The 'webflow' in the package path 'org.springframework.samples.webflow' signifies that the classes within these packages are utilizing the Spring Web Flow framework. For instance, classes in the 'autocomplete', 'validation', 'ajax', 'jsf', and 'modal' packages are all part of different web flows.</p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/jsf/FacesHelper.java" line="1"></p>
 <hr />
 <h2 id="webflow-with-jsf">Webflow with JSF</h2>
 <p>In this file, we see an example of how Webflow can be used with JSF. The <code>FacesHelper</code> class is a utility class that can be used to interact with the JSF <code>FacesContext</code>, which is a fundamental part of JSF.</p>
-<pre><code class="java">package org.springframework.samples.webflow.jsf;
+<pre><code class="language-java">package org.springframework.samples.webflow.jsf;
 
 import jakarta.faces.context.FacesContext;
 
 import org.springframework.stereotype.Component;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/ajax/UserBean.java" line="1"></p>
 <hr />
 <h2 id="webflow-with-ajax">Webflow with Ajax</h2>
 <p>This file demonstrates how Webflow can be used in conjunction with Ajax to create dynamic user interfaces. The <code>UserBean</code> class is a managed bean that can be used to store and retrieve user data in an Ajax-enabled JSF page.</p>
-<pre><code class="java">package org.springframework.samples.webflow.ajax;
+<pre><code class="language-java">package org.springframework.samples.webflow.ajax;
 
 import java.io.Serializable;
 
 import org.springframework.binding.message.MessageBuilder;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/upload/FileUploadController.java" line="1"></p>
 <hr />
 <h2 id="webflow-with-file-upload">Webflow with File Upload</h2>
 <p>This file shows how Webflow can be used to handle file uploads. The <code>FileUploadController</code> class is a controller that handles the file upload process.</p>
-<pre><code class="java">package org.springframework.samples.webflow.upload;
+<pre><code class="language-java">package org.springframework.samples.webflow.upload;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/validation/Account.java" line="1"></p>
 <hr />
 <h2 id="webflow-with-validation">Webflow with Validation</h2>
 <p>This file demonstrates how Webflow can be used with validation. The <code>Account</code> class is a model class that uses JSR 303 annotations to define validation rules for its fields.</p>
-<pre><code class="java">package org.springframework.samples.webflow.validation;
+<pre><code class="language-java">package org.springframework.samples.webflow.validation;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -132,7 +165,6 @@ public class Account implements Serializable {
 
     @Past
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <h1 id="spring-web-flow-functionalities">Spring Web Flow Functionalities</h1>
@@ -141,7 +173,7 @@ public class Account implements Serializable {
 <hr />
 <h2 id="userbean-class">UserBean Class</h2>
 <p>The UserBean class is a Serializable class that represents a user within the application. It is used to store and manage user-related data.</p>
-<pre><code class="java">package org.springframework.samples.webflow.ajax;
+<pre><code class="language-java">package org.springframework.samples.webflow.ajax;
 
 import java.io.Serializable;
 
@@ -151,104 +183,98 @@ import org.springframework.webflow.execution.RequestContext;
 
 public class UserBean implements Serializable {
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/autocomplete/Person.java" line="1"></p>
 <hr />
 <h2 id="person-class">Person Class</h2>
 <p>The Person class is a Serializable class that represents a person within the application. It is used to store and manage person-related data.</p>
-<pre><code class="java">package org.springframework.samples.webflow.autocomplete;
+<pre><code class="language-java">package org.springframework.samples.webflow.autocomplete;
 
 import java.io.Serializable;
 
 public class Person implements Serializable {
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/validation/Reservation.java" line="1"></p>
 <hr />
 <h2 id="reservation-class">Reservation Class</h2>
 <p>The Reservation class is a Serializable class that represents a reservation within the application. It is used to store and manage reservation-related data.</p>
-<pre><code class="java">package org.springframework.samples.webflow.validation;
+<pre><code class="language-java">package org.springframework.samples.webflow.validation;
 
 import java.io.Serializable;
 import java.util.Date;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/validation/Account.java" line="1"></p>
 <hr />
 <h2 id="account-class">Account Class</h2>
 <p>The Account class is a Serializable class that represents an account within the application. It is used to store and manage account-related data.</p>
-<pre><code class="java">package org.springframework.samples.webflow.validation;
+<pre><code class="language-java">package org.springframework.samples.webflow.validation;
 
 import java.io.Serializable;
 import java.util.Date;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/autocomplete/FormBean.java" line="1"></p>
 <hr />
 <h2 id="formbean-class">FormBean Class</h2>
 <p>The FormBean class is a Serializable class that represents a form within the application. It is used to store and manage form-related data.</p>
-<pre><code class="java">package org.springframework.samples.webflow.autocomplete;
+<pre><code class="language-java">package org.springframework.samples.webflow.autocomplete;
 
 import java.io.Serializable;
 
 public class FormBean implements Serializable {
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p>&nbsp;</p>
 <p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
 <p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

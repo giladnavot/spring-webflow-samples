@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +9,29 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Understanding Spring in the Primefaces-Showcase Project - JPMC Demo</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">JPMC Demo</a>
-                </div>
+                <a class="navbar-brand" href="..">JPMC Demo</a>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -50,19 +41,59 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#spring-configuration-files">Spring Configuration Files</a></li>
-        <li class="main "><a href="#spring-security-configuration">Spring Security Configuration</a></li>
-        <li class="main "><a href="#spring-web-flow-configuration">Spring Web Flow Configuration</a></li>
-        <li class="main "><a href="#spring-servlet-context-configuration">Spring Servlet Context Configuration</a></li>
-        <li class="main "><a href="#spring-root-context-configuration">Spring Root Context Configuration</a></li>
-        <li class="main "><a href="#spring-endpoints">Spring Endpoints</a></li>
-            <li><a href="#login-endpoint">/login Endpoint</a></li>
-            <li><a href="#home-endpoint">/home Endpoint</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-configuration-files" class="nav-link">Spring Configuration Files</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-security-configuration" class="nav-link">Spring Security Configuration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-web-flow-configuration" class="nav-link">Spring Web Flow Configuration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-servlet-context-configuration" class="nav-link">Spring Servlet Context Configuration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-root-context-configuration" class="nav-link">Spring Root Context Configuration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#spring-endpoints" class="nav-link">Spring Endpoints</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#login-endpoint" class="nav-link">/login Endpoint</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#home-endpoint" class="nav-link">/home Endpoint</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <p>Spring in the primefaces-showcase project refers to the Spring Framework, a powerful Java framework used for building enterprise-grade applications. It provides a comprehensive programming and configuration model.</p>
 <p>In the servlet-context.xml file, Spring is used to enable the Spring MVC @Controller programming model and to serve classpath resources. This allows for the creation of web applications with less configuration and easy resource management.</p>
@@ -71,7 +102,7 @@
 <hr />
 <h1 id="spring-configuration-files">Spring Configuration Files</h1>
 <p>This is the Spring configuration file for controllers. It defines URL mappings for views and scans for components in the specified package.</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
@@ -93,14 +124,13 @@
     &lt;bean name=&quot;mvcHandlerMappingIntrospector&quot;
           class=&quot;org.springframework.web.servlet.handler.HandlerMappingIntrospector&quot;/&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/security-config.xml" line="1"></p>
 <hr />
 <h1 id="spring-security-configuration">Spring Security Configuration</h1>
 <p>This is the Spring Security configuration file. It defines security constraints for different URL patterns and user roles.</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;b:beans xmlns=&quot;http://www.springframework.org/schema/security&quot;
          xmlns:b=&quot;http://www.springframework.org/schema/beans&quot;
          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
@@ -122,14 +152,13 @@
 
     &lt;user-service&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/webflow.xml" line="1"></p>
 <hr />
 <h1 id="spring-web-flow-configuration">Spring Web Flow Configuration</h1>
 <p>This is the Spring Web Flow configuration file. It defines the flow executor and registry, and configures the Spring Web Flow JSF integration.</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans:beans xmlns=&quot;http://www.springframework.org/schema/webflow-config&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot;
@@ -151,14 +180,13 @@
         &lt;flow-location-pattern value=&quot;/**/flow.xml&quot; /&gt;
         &lt;flow-location id=&quot;parent-flow&quot; path=&quot;parent-flow.xml&quot;/&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/servlet-context.xml" line="1"></p>
 <hr />
 <h1 id="spring-servlet-context-configuration">Spring Servlet Context Configuration</h1>
 <p>This is the Spring Servlet Context configuration file. It defines the DispatcherServlet's request-processing infrastructure, imports user-defined @Controller beans, and enables the Spring MVC @Controller programming model.</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
@@ -180,14 +208,13 @@
     &lt;!-- Scan for Spring beans declared via annotations. --&gt;
     &lt;context:component-scan base-package=&quot;org.springframework.samples.webflow&quot;/&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/root-context.xml" line="1"></p>
 <hr />
 <h1 id="spring-root-context-configuration">Spring Root Context Configuration</h1>
 <p>This is the Spring Root Context configuration file. It defines shared resources visible to all other web components.</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
     xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
@@ -198,7 +225,6 @@
 
 &lt;/beans&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <h1 id="spring-endpoints">Spring Endpoints</h1>
@@ -207,65 +233,62 @@
 <hr />
 <h2 id="login-endpoint">/login Endpoint</h2>
 <p>The <code>/login</code> endpoint is defined here. It is mapped to a view-controller, which means that when this endpoint is accessed, Spring will direct the user to the corresponding view without any additional controller logic.</p>
-<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/login&quot; /&gt;
+<pre><code class="language-xml">    &lt;mvc:view-controller path=&quot;/login&quot; /&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="18"></p>
 <hr />
 <h2 id="home-endpoint">/home Endpoint</h2>
 <p>The <code>/home</code> endpoint is defined here. Similar to the <code>/login</code> endpoint, it is mapped to a view-controller. When this endpoint is accessed, the user is directed to the corresponding view.</p>
-<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/home&quot; /&gt;
+<pre><code class="language-xml">    &lt;mvc:view-controller path=&quot;/home&quot; /&gt;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p>&nbsp;</p>
 <p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
 <p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

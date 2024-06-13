@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +9,29 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Basic Concepts of Styles in Spring Web Flow Samples - JPMC Demo</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">JPMC Demo</a>
-                </div>
+                <a class="navbar-brand" href="..">JPMC Demo</a>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -50,23 +41,53 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#blueprint-css-framework">Blueprint CSS Framework</a></li>
-        <li class="main "><a href="#internet-explorer-specific-styles">Internet Explorer Specific Styles</a></li>
-        <li class="main "><a href="#fancy-type-plugin">Fancy Type Plugin</a></li>
-        <li class="main "><a href="#buttons-plugin">Buttons Plugin</a></li>
-        <li class="main "><a href="#right-to-left-language-support">Right-to-Left Language Support</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#blueprint-css-framework" class="nav-link">Blueprint CSS Framework</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#internet-explorer-specific-styles" class="nav-link">Internet Explorer Specific Styles</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fancy-type-plugin" class="nav-link">Fancy Type Plugin</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#buttons-plugin" class="nav-link">Buttons Plugin</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#right-to-left-language-support" class="nav-link">Right-to-Left Language Support</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <p>Styles in the spring-webflow-samples project refer to the CSS rules defined in the styles directory. These rules are used to control the appearance of the web pages in the project. For example, there are selectors like 'del' and 'ul', and classes like '.loud' defined in the typography.css file. These styles are applied to the corresponding HTML elements to control their visual presentation.</p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/screen.css" line="1"></p>
 <hr />
 <h1 id="blueprint-css-framework">Blueprint CSS Framework</h1>
 <p>This file is part of the Blueprint CSS framework, which is a design tool for creating flexible grid layouts. It includes styles for typography, forms, and a grid system.</p>
-<pre><code class="css">/* -----------------------------------------------------------------------
+<pre><code class="language-css">/* -----------------------------------------------------------------------
 
 
  Blueprint CSS Framework 0.9
@@ -88,14 +109,13 @@ table, td, th {vertical-align:middle;}
 blockquote:before, blockquote:after, q:before, q:after {content:&quot;&quot;;}
 blockquote, q {quotes:&quot;&quot; &quot;&quot;;}
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/src/ie.css" line="1"></p>
 <hr />
 <h1 id="internet-explorer-specific-styles">Internet Explorer Specific Styles</h1>
 <p>This file contains styles specifically for Internet Explorer. It includes various hacks to ensure that the web application displays correctly in this browser.</p>
-<pre><code class="css">/* -------------------------------------------------------------- 
+<pre><code class="language-css">/* -------------------------------------------------------------- 
 
    ie.css
 
@@ -117,14 +137,13 @@ body { text-align: center; }
 * html div.span-15, * html div.span-16, * html div.span-17, 
 * html div.span-18, * html div.span-19, * html div.span-20, 
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/plugins/fancy-type/screen.css" line="1"></p>
 <hr />
 <h1 id="fancy-type-plugin">Fancy Type Plugin</h1>
 <p>This file is part of the Fancy Type plugin for the Blueprint CSS framework. It provides advanced classes for manipulating text, such as indentation, reduced size type, and uppercase words.</p>
-<pre><code class="css">/* -------------------------------------------------------------- 
+<pre><code class="language-css">/* -------------------------------------------------------------- 
 
    fancy-type.css
    * Lots of pretty advanced classes for manipulating text.
@@ -146,14 +165,13 @@ body { text-align: center; }
   color: #666; 
   font-family: &quot;Warnock Pro&quot;, &quot;Goudy Old Style&quot;,&quot;Palatino&quot;,&quot;Book Antiqua&quot;, Georgia, serif; 
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/plugins/buttons/screen.css" line="1"></p>
 <hr />
 <h1 id="buttons-plugin">Buttons Plugin</h1>
 <p>This file is part of the Buttons plugin for the Blueprint CSS framework. It provides styles for creating CSS-only buttons.</p>
-<pre><code class="css">/* -------------------------------------------------------------- 
+<pre><code class="language-css">/* -------------------------------------------------------------- 
 
    buttons.css
    * Gives you some great CSS-only buttons.
@@ -175,14 +193,13 @@ a.button, button {
   border-top:1px solid #eee;
   border-left:1px solid #eee;
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/plugins/rtl/screen.css" line="1"></p>
 <hr />
 <h1 id="right-to-left-language-support">Right-to-Left Language Support</h1>
 <p>This file provides styles for supporting right-to-left languages. It mirrors the Blueprint CSS framework to accommodate languages that are read from right to left.</p>
-<pre><code class="css">/* --------------------------------------------------------------
+<pre><code class="language-css">/* --------------------------------------------------------------
 
    rtl.css
    * Mirrors Blueprint for left-to-right languages
@@ -204,54 +221,52 @@ body table .last { padding-left: 0; }
 
 body .append-1   { padding-right: 0; padding-left: 40px; }  
 </code></pre>
-
 <hr />
 <p></SwmSnippet></p>
 <p>&nbsp;</p>
 <p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
 <p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">
