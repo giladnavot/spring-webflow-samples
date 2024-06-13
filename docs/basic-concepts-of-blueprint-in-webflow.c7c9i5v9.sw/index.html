@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Basic Concepts of Blueprint in Webflow - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#blueprint-grid-system">Blueprint Grid System</a></li>
+        <li class="main "><a href="#blueprint-typography">Blueprint Typography</a></li>
+        <li class="main "><a href="#blueprint-forms">Blueprint Forms</a></li>
+        <li class="main "><a href="#blueprint-reset">Blueprint Reset</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>Blueprint is a CSS framework that aims to cut down on your CSS development time. It gives you a solid CSS foundation to build your project on top of, with an easy-to-use grid, sensible typography, and even a stylesheet for printing.</p>
+<p>In the context of this repository, Blueprint is used to style the web pages. It provides a set of CSS files that are used across the application to ensure a consistent look and feel. These files include a grid system (grid.css), typography rules (typography.css), form styling (forms.css), and specific styles for Internet Explorer (ie.css) and print layouts (print.css).</p>
+<p>The grid system provided by Blueprint helps in creating page layouts through a series of containers, rows, and columns. The typography.css file provides styles for different HTML elements to ensure consistent typography across the application. The forms.css file provides styles for form elements, and the print.css and ie.css files provide specific styles for print layouts and Internet Explorer respectively.</p>
+<p>In addition to these, Blueprint also provides helper classes that can be used to modify the appearance of elements. For example, the .loud class in typography.css can be used to make the text color black, and the .quiet class can be used to make the text color grey.</p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/src/grid.css" line="30"></p>
+<hr />
+<h1 id="blueprint-grid-system">Blueprint Grid System</h1>
+<p>The grid system in Blueprint is defined in the <code>grid.css</code> file. It provides classes for different column widths (<code>.span-1</code> to <code>.span-24</code>), which can be used to create a responsive layout.</p>
+<pre><code class="css">/* Sets up basic grid floating and margin. */
+.column, div.span-1, div.span-2, div.span-3, div.span-4, div.span-5, div.span-6, div.span-7, div.span-8, div.span-9, div.span-10, div.span-11, div.span-12, div.span-13, div.span-14, div.span-15, div.span-16, div.span-17, div.span-18, div.span-19, div.span-20, div.span-21, div.span-22, div.span-23, div.span-24 {
+  float: left;
+  margin-right: 10px;
+}
+
+/* The last column in a row needs this class. */
+.last, div.last { margin-right: 0; }
+
+/* Use these classes to set the width of a column. */
+.span-1 {width: 30px;}
+
+.span-2 {width: 70px;}
+.span-3 {width: 110px;}
+.span-4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/src/typography.css" line="8"></p>
+<hr />
+<h1 id="blueprint-typography">Blueprint Typography</h1>
+<p>The <code>typography.css</code> file in Blueprint sets up default typography for the web application. It provides styles for different heading levels (h1 to h6), paragraphs, links, and more.</p>
+<pre><code class="css">/* Default font settings. 
+   The font-size percentage is of 16px. (0.75 * 16px = 12px) */
+html { font-size:100.01%; }
+body { 
+  font-size: 75%;
+  color: #222; 
+  background: #fff;
+  font-family: &quot;Helvetica Neue&quot;, Arial, Helvetica, sans-serif;
+}
+
+
+/* Headings
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
+
+h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/src/forms.css" line="13"></p>
+<hr />
+<h1 id="blueprint-forms">Blueprint Forms</h1>
+<p>Blueprint's <code>forms.css</code> file sets up default styling for forms. It provides classes for different form elements like input fields, checkboxes, and radio buttons.</p>
+<pre><code class="css">label       { font-weight: bold; }
+fieldset    { padding:1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc; }
+legend      { font-weight: bold; font-size:1.2em; }
+
+
+/* Form fields
+-------------------------------------------------------------- */
+
+input[type=text], input[type=password],
+input.text, input.title,
+textarea, select {
+  background-color:#fff;
+  border:1px solid #bbb;
+}
+input[type=text]:focus, input[type=password]:focus,
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/src/reset.css" line="8"></p>
+<hr />
+<h1 id="blueprint-reset">Blueprint Reset</h1>
+<p>The <code>reset.css</code> file in Blueprint resets default browser CSS. This helps in maintaining consistency in appearance across different browsers.</p>
+<pre><code class="css">html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+body { 
+  line-height: 1.5; 
+}
+
+/* Tables still need 'cellspacing=&quot;0&quot;' in the markup. */
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

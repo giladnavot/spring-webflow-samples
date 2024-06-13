@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Understanding the Role of WEB-INF in Web Applications - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#thymeleaf-templates">Thymeleaf Templates</a></li>
+        <li class="main "><a href="#messages-properties-files">Messages Properties Files</a></li>
+        <li class="main "><a href="#spring-web-flow-configuration-files">Spring Web Flow Configuration Files</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>The <code>WEB-INF</code> directory in a web application is a location that provides a secure place to store resources such as classes, libraries, and configuration files that are used by the application. It is not accessible directly from the web and is typically used to store resources that are not intended to be served directly to a user.</p>
+<p>In the <code>booking-mvc</code> application, the <code>WEB-INF</code> directory contains HTML files that define the views of the application. These files are used by the Spring MVC framework to generate the user interface of the application. The <code>layouts</code> directory contains a standard layout that is used by multiple views, and the <code>hotels</code> directory contains views specific to the hotel booking functionality.</p>
+<p><SwmSnippet path="/booking-mvc/src/main/webapp/WEB-INF/hotels/booking/reviewBooking.html" line="1"></p>
+<hr />
+<h1 id="thymeleaf-templates">Thymeleaf Templates</h1>
+<p>This is an example of a Thymeleaf template used to generate the HTML for the review booking page. It uses Thymeleaf syntax to bind data from the model to the view.</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; 
+      xmlns:th=&quot;http://www.thymeleaf.org&quot;
+      lang=&quot;en&quot;&gt;
+
+&lt;head th:replace=&quot;layouts/standard.html :: //head&quot;&gt;
+
+    &lt;!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --&gt;
+    &lt;!-- This &lt;head&gt; section is only used for static prototyping purposes.             --&gt;
+    &lt;!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/webapp/WEB-INF/hotels/booking/messages.properties" line="1"></p>
+<hr />
+<h1 id="messages-properties-files">Messages Properties Files</h1>
+<p>This is an example of a messages properties file used to display messages in the web application. It contains key-value pairs, where the key is a message code and the value is the message text.</p>
+<pre><code class="ini">booking.checkinDate.NotNull=The check in date is required
+booking.checkinDate.Future=The check in date must be in the future
+booking.checkinDate.beforeToday=The check in date must be a future date
+booking.checkinDate.typeMismatch=The check in date must be in the format mm-dd-yyyy
+
+booking.checkoutDate.Future=The check out date must be in the future
+booking.checkoutDate.NotNull=The check out date is required
+booking.checkoutDate.typeMismatch=The check out date must be in the format mm-dd-yyyy
+booking.BookingDateRange=The check out date must be later than the check in date
+
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/webapp/WEB-INF/hotels/booking/booking-flow.xml" line="1"></p>
+<hr />
+<h1 id="spring-web-flow-configuration-files">Spring Web Flow Configuration Files</h1>
+<p>This is an example of a Spring Web Flow configuration file. It defines the flow of the web application, including the states, transitions, and actions.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;flow xmlns=&quot;http://www.springframework.org/schema/webflow&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/webflow
+        https://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd&quot;&gt;
+
+    &lt;secured attributes=&quot;ROLE_USER&quot; /&gt;
+
+    &lt;input name=&quot;hotelId&quot; required=&quot;true&quot; /&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

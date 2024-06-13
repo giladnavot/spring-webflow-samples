@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Understanding Spring in the Primefaces-Showcase Project - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#spring-configuration-files">Spring Configuration Files</a></li>
+        <li class="main "><a href="#spring-security-configuration">Spring Security Configuration</a></li>
+        <li class="main "><a href="#spring-web-flow-configuration">Spring Web Flow Configuration</a></li>
+        <li class="main "><a href="#spring-servlet-context-configuration">Spring Servlet Context Configuration</a></li>
+        <li class="main "><a href="#spring-root-context-configuration">Spring Root Context Configuration</a></li>
+        <li class="main "><a href="#spring-endpoints">Spring Endpoints</a></li>
+            <li><a href="#login-endpoint">/login Endpoint</a></li>
+            <li><a href="#home-endpoint">/home Endpoint</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>Spring in the primefaces-showcase project refers to the Spring Framework, a powerful Java framework used for building enterprise-grade applications. It provides a comprehensive programming and configuration model.</p>
+<p>In the servlet-context.xml file, Spring is used to enable the Spring MVC @Controller programming model and to serve classpath resources. This allows for the creation of web applications with less configuration and easy resource management.</p>
+<p>In the webflow.xml file, Spring is used to execute flows, which is the central entry point into the Spring Web Flow system. It also configures the Spring Web Flow JSF integration and applies Spring Security authorities. This allows for the creation of complex user interfaces in a web application.</p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="1"></p>
+<hr />
+<h1 id="spring-configuration-files">Spring Configuration Files</h1>
+<p>This is the Spring configuration file for controllers. It defines URL mappings for views and scans for components in the specified package.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+
+    &lt;!-- 
+        URL mappings for views without controller logic.
+        Example: 
+            Incoming path '/home' is mapped maps to the view name 'home'
+            UrlBasedViewResolver in servlet-context resolves 'home' to /WEB-INF/views/home.xhtml 
+    --&gt;
+    &lt;mvc:view-controller path=&quot;/login&quot; /&gt;
+
+    &lt;mvc:view-controller path=&quot;/home&quot; /&gt;
+
+    &lt;bean name=&quot;mvcHandlerMappingIntrospector&quot;
+          class=&quot;org.springframework.web.servlet.handler.HandlerMappingIntrospector&quot;/&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/security-config.xml" line="1"></p>
+<hr />
+<h1 id="spring-security-configuration">Spring Security Configuration</h1>
+<p>This is the Spring Security configuration file. It defines security constraints for different URL patterns and user roles.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;b:beans xmlns=&quot;http://www.springframework.org/schema/security&quot;
+         xmlns:b=&quot;http://www.springframework.org/schema/beans&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd&quot;&gt;
+
+    &lt;b:bean id=&quot;expressionHandler&quot;
+            class=&quot;org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler&quot; /&gt;
+
+    &lt;http auto-config=&quot;true&quot;&gt;
+        &lt;form-login login-page=&quot;/app/login&quot; login-processing-url=&quot;/app/loginProcess&quot;
+            default-target-url=&quot;/app/home&quot; authentication-failure-url=&quot;/app/login?login_error=1&quot; /&gt;
+        &lt;logout logout-url=&quot;/app/logout&quot; logout-success-url=&quot;/app/home&quot; /&gt;
+        &lt;intercept-url pattern=&quot;/secured/appleUser&quot; method=&quot;POST&quot; access=&quot;hasRole('ROLE_APPLE_USER')&quot; /&gt;
+        &lt;intercept-url pattern=&quot;/secured/androidUser&quot; method=&quot;POST&quot; access=&quot;hasRole('ROLE_ANDROID_USER')&quot; /&gt;
+        &lt;intercept-url pattern=&quot;/**&quot; access=&quot;permitAll&quot;/&gt;
+        &lt;csrf disabled=&quot;true&quot; /&gt;
+    &lt;/http&gt;
+
+    &lt;user-service&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/webflow.xml" line="1"></p>
+<hr />
+<h1 id="spring-web-flow-configuration">Spring Web Flow Configuration</h1>
+<p>This is the Spring Web Flow configuration file. It defines the flow executor and registry, and configures the Spring Web Flow JSF integration.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans:beans xmlns=&quot;http://www.springframework.org/schema/webflow-config&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:faces=&quot;http://www.springframework.org/schema/faces&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/webflow-config https://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/faces https://www.springframework.org/schema/faces/spring-faces.xsd&quot;&gt;
+
+    &lt;!-- Executes flows: the central entry point into the Spring Web Flow system --&gt;
+    &lt;flow-executor id=&quot;flowExecutor&quot;&gt;
+        &lt;flow-execution-listeners&gt;
+            &lt;listener ref=&quot;facesContextListener&quot;/&gt;
+            &lt;listener ref=&quot;securityListener&quot;/&gt;
+        &lt;/flow-execution-listeners&gt;
+    &lt;/flow-executor&gt;
+
+    &lt;!-- The registry of executable flow definitions --&gt;
+    &lt;flow-registry id=&quot;flowRegistry&quot; flow-builder-services=&quot;flowBuilderServices&quot; base-path=&quot;/WEB-INF/flows&quot;&gt;
+        &lt;flow-location-pattern value=&quot;/**/flow.xml&quot; /&gt;
+        &lt;flow-location id=&quot;parent-flow&quot; path=&quot;parent-flow.xml&quot;/&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/servlet-context.xml" line="1"></p>
+<hr />
+<h1 id="spring-servlet-context-configuration">Spring Servlet Context Configuration</h1>
+<p>This is the Spring Servlet Context configuration file. It defines the DispatcherServlet's request-processing infrastructure, imports user-defined @Controller beans, and enables the Spring MVC @Controller programming model.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xmlns:faces=&quot;http://www.springframework.org/schema/faces&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/faces https://www.springframework.org/schema/faces/spring-faces.xsd
+        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+
+    &lt;!--
+        DispatcherServlet Context: defines this servlet's request-processing infrastructure
+    --&gt;
+
+    &lt;!-- Imports user-defined @Controller beans that process client requests --&gt;
+    &lt;import resource=&quot;controllers.xml&quot; /&gt;
+    &lt;import resource=&quot;webflow.xml&quot; /&gt;
+
+    &lt;!-- Scan for Spring beans declared via annotations. --&gt;
+    &lt;context:component-scan base-package=&quot;org.springframework.samples.webflow&quot;/&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/root-context.xml" line="1"></p>
+<hr />
+<h1 id="spring-root-context-configuration">Spring Root Context Configuration</h1>
+<p>This is the Spring Root Context configuration file. It defines shared resources visible to all other web components.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;!-- Root Context: defines shared resources visible to all other web components --&gt;
+    &lt;import resource=&quot;security-config.xml&quot;/&gt;
+    &lt;import resource=&quot;servlet-context.xml&quot;/&gt;
+
+&lt;/beans&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<h1 id="spring-endpoints">Spring Endpoints</h1>
+<p>Spring Framework Endpoints</p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="16"></p>
+<hr />
+<h2 id="login-endpoint">/login Endpoint</h2>
+<p>The <code>/login</code> endpoint is defined here. It is mapped to a view-controller, which means that when this endpoint is accessed, Spring will direct the user to the corresponding view without any additional controller logic.</p>
+<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/login&quot; /&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="18"></p>
+<hr />
+<h2 id="home-endpoint">/home Endpoint</h2>
+<p>The <code>/home</code> endpoint is defined here. Similar to the <code>/login</code> endpoint, it is mapped to a view-controller. When this endpoint is accessed, the user is directed to the corresponding view.</p>
+<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/home&quot; /&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>BookingService Interface in Booking mvc - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#what-is-bookingservice">What is BookingService</a></li>
+        <li class="main "><a href="#variables-and-functions">Variables and functions</a></li>
+        <li class="main "><a href="#usage-example">Usage example</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>This document will cover the <code>BookingService</code> interface in the <code>spring-webflow-samples</code> repository. We will cover:</p>
+<ol>
+<li>What the <code>BookingService</code> interface is and its purpose.</li>
+<li>The variables and functions defined in <code>BookingService</code>.</li>
+<li>An example of how to use <code>BookingService</code> in <code>JpaBookingService</code>.</li>
+</ol>
+<pre><code class="mermaid">graph TD;
+  BookingService:::currentBaseStyle
+BookingService --&gt; JpaBookingService
+
+ classDef currentBaseStyle color:#000000,fill:#7CB9F4
+</code></pre>
+
+<h1 id="what-is-bookingservice">What is BookingService</h1>
+<p><code>BookingService</code> is an interface in the <code>spring-webflow-samples</code> repository. It is used for retrieving hotels and bookings from a backing repository and also supports the ability to cancel a booking.</p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/BookingService.java" line="16"></p>
+<hr />
+<h1 id="variables-and-functions">Variables and functions</h1>
+<p>The function <code>findBookings</code> is used to find bookings made by a given user. It takes a username as a parameter and returns a list of bookings made by that user.</p>
+<pre><code class="java">    List&lt;Booking&gt; findBookings(String username);
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/BookingService.java" line="23"></p>
+<hr />
+<p>The function <code>findHotels</code> is used to find hotels available for booking by some criteria. It takes a <code>SearchCriteria</code> object as a parameter and returns a list of hotels meeting the criteria.</p>
+<pre><code class="java">    List&lt;Hotel&gt; findHotels(SearchCriteria criteria);
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/BookingService.java" line="30"></p>
+<hr />
+<p>The function <code>findHotelById</code> is used to find a hotel by its identifier. It takes a hotel id as a parameter and returns the corresponding hotel.</p>
+<pre><code class="java">    Hotel findHotelById(Long id);
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/BookingService.java" line="38"></p>
+<hr />
+<p>The function <code>createBooking</code> is used to create a new, transient hotel booking instance for the given user. It takes a hotel id and a username as parameters and returns the new transient booking instance.</p>
+<pre><code class="java">    Booking createBooking(Long hotelId, String userName);
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/BookingService.java" line="44"></p>
+<hr />
+<p>The function <code>persistBooking</code> is used to persist the booking to the database. It takes a <code>Booking</code> object as a parameter.</p>
+<pre><code class="java">    void persistBooking(Booking booking);
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/BookingService.java" line="50"></p>
+<hr />
+<p>The function <code>cancelBooking</code> is used to cancel an existing booking. It takes a booking id as a parameter.</p>
+<pre><code class="java">    void cancelBooking(Long id);
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/JpaBookingService.java" line="18"></p>
+<hr />
+<h1 id="usage-example">Usage example</h1>
+<p><code>JpaBookingService</code> is an example of how to use <code>BookingService</code>. It implements <code>BookingService</code> and provides the implementation for all the functions defined in <code>BookingService</code>. It uses a JPA entity manager to issue data access calls against the backing repository.</p>
+<pre><code class="java">@Service(&quot;bookingService&quot;)
+@Repository
+public class JpaBookingService implements BookingService {
+
+    private EntityManager em;
+
+    @PersistenceContext
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+
+    @Transactional(readOnly = true)
+    @SuppressWarnings(&quot;unchecked&quot;)
+    public List&lt;Booking&gt; findBookings(String username) {
+        if (username != null) {
+            return em.createQuery(&quot;select b from Booking b where b.user.username = :username order by b.checkinDate&quot;)
+                    .setParameter(&quot;username&quot;, username).getResultList();
+        } else {
+            return null;
+        }
+    }
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

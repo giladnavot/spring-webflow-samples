@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Basic Concepts of Embedded Flow - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#embedded-flow-definition">Embedded Flow Definition</a></li>
+        <li class="main "><a href="#using-the-embedded-flow">Using the Embedded Flow</a></li>
+        <li class="main "><a href="#embedded-flow-functions">Embedded Flow Functions</a></li>
+            <li><a href="#view-state">View-State</a></li>
+            <li><a href="#end-state">End-State</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>An embedded flow in Spring Web Flow is a sub-flow that is called within the context of a parent flow. It's a reusable module that can be included in multiple parent flows. In the <code>embedded-flow</code> directory, the <code>flow.xml</code> file defines the flow of the application. It contains view states like <code>step1</code> and <code>step2</code>, and end states like <code>success</code> and <code>cancel</code>. Each state represents a step in the flow and defines transitions to other states based on events. The JSP files like <code>step1.jsp</code>, <code>step2.jsp</code>, <code>success.jsp</code>, and <code>cancel.jsp</code> are the views associated with these states. The <code>views.xml</code> file is a Tiles definitions file that maps logical view names to JSP files.</p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/flows/embedded-flow/flow.xml" line="1"></p>
+<hr />
+<h1 id="embedded-flow-definition">Embedded Flow Definition</h1>
+<p>This is the definition of the embedded flow. It consists of two view states (<code>step1</code> and <code>step2</code>), and two end states (<code>success</code> and <code>cancel</code>). Transitions between the states are defined using the 'transition' element.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;flow xmlns=&quot;http://www.springframework.org/schema/webflow&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/webflow 
+        https://www.springframework.org/schema/webflow/spring-webflow.xsd&quot;&gt;
+
+    &lt;view-state id=&quot;step1&quot; view=&quot;embeddedFlow/step1&quot;&gt;
+        &lt;transition on=&quot;next&quot; to=&quot;step2&quot;/&gt; 
+        &lt;transition on=&quot;cancel&quot; to=&quot;cancel&quot;/&gt;
+    &lt;/view-state&gt;
+
+    &lt;view-state id=&quot;step2&quot; view=&quot;embeddedFlow/step2&quot;&gt;
+        &lt;transition on=&quot;previous&quot; to=&quot;step1&quot;/&gt;
+        &lt;transition on=&quot;finish&quot; to=&quot;success&quot;/&gt;
+        &lt;transition on=&quot;cancel&quot; to=&quot;cancel&quot;/&gt;
+    &lt;/view-state&gt;
+
+    &lt;end-state id=&quot;success&quot; view=&quot;embeddedFlow/success&quot;/&gt;
+
+    &lt;end-state id=&quot;cancel&quot; view=&quot;embeddedFlow/cancel&quot;/&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/flows/embedded-flow/step1.jsp" line="1"></p>
+<hr />
+<h1 id="using-the-embedded-flow">Using the Embedded Flow</h1>
+<p>This is an example of how the embedded flow is used. The 'step1' view state is rendered using the <code>step1.jsp</code> file. The 'next' and 'cancel' events trigger transitions to the 'step2' and 'cancel' states, respectively.</p>
+<p>```java server pages
+<div id="embeddedFlow">
+    <p class="notice">This is step 1 of the embedded flow</p>
+    <form id="step1" action="${flowExecutionUrl}" method="POST">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
+        <button id="next" type="submit" name="_eventId_next">Next &gt;&gt;</button>
+        <script type="text/javascript">
+            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'next',event:'onclick',formId:'step1',params:{fragments:"body"}}));
+            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'cancel',event:'onclick',formId:'step1',params:{fragments:"body"}}));
+        </script>
+    </form>
+</div></p>
+<pre><code>
+---
+
+&lt;/SwmSnippet&gt;
+
+&lt;SwmSnippet path=&quot;/webflow-showcase/src/main/webapp/WEB-INF/flows/embedded-flow/step2.jsp&quot; line=&quot;1&quot;&gt;
+
+---
+
+Similarly, the 'step2' view state is rendered using the `step2.jsp` file. The 'previous', 'finish', and 'cancel' events trigger transitions to the 'step1', 'success', and 'cancel' states, respectively.
+
+```java server pages
+&lt;div id=&quot;embeddedFlow&quot;&gt;
+    &lt;p class=&quot;notice&quot;&gt;This is step 2 of the embedded flow&lt;/p&gt;
+    &lt;form id=&quot;step2&quot; action=&quot;${flowExecutionUrl}&quot; method=&quot;POST&quot;&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;${_csrf.parameterName}&quot; value=&quot;${_csrf.token}&quot;/&gt;
+        &lt;button id=&quot;cancel&quot; type=&quot;submit&quot; name=&quot;_eventId_cancel&quot;&gt;Cancel&lt;/button&gt;
+        &lt;button id=&quot;previous&quot; type=&quot;submit&quot; name=&quot;_eventId_previous&quot;&gt;&amp;lt;&amp;lt; Previous&lt;/button&gt;
+        &lt;button id=&quot;finish&quot; type=&quot;submit&quot; name=&quot;_eventId_finish&quot;&gt;Finish &amp;gt;&amp;gt;&lt;/button&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'finish',event:'onclick',formId:'step2',params:{fragments:&quot;body&quot;}}));
+            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'previous',event:'onclick',formId:'step2',params:{fragments:&quot;body&quot;}}));
+            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'cancel',event:'onclick',formId:'step2',params:{fragments:&quot;body&quot;}}));
+        &lt;/script&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<h1 id="embedded-flow-functions">Embedded Flow Functions</h1>
+<p>The Embedded flow consists of several view-states and end-states that guide the user through a process. The flow is defined in the flow.xml file and each state is associated with a specific view.</p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/flows/embedded-flow/flow.xml" line="8"></p>
+<hr />
+<h2 id="view-state">View-State</h2>
+<p>The view-state represents a stage in the flow where a view is displayed to the user. In the Embedded flow, there are two view-states: 'step1' and 'step2'. Each view-state is associated with a specific view (e.g., 'embeddedFlow/step1' and 'embeddedFlow/step2') and defines transitions to other states based on user actions.</p>
+<pre><code class="xml">    &lt;view-state id=&quot;step1&quot; view=&quot;embeddedFlow/step1&quot;&gt;
+        &lt;transition on=&quot;next&quot; to=&quot;step2&quot;/&gt; 
+        &lt;transition on=&quot;cancel&quot; to=&quot;cancel&quot;/&gt;
+    &lt;/view-state&gt;
+
+    &lt;view-state id=&quot;step2&quot; view=&quot;embeddedFlow/step2&quot;&gt;
+        &lt;transition on=&quot;previous&quot; to=&quot;step1&quot;/&gt;
+        &lt;transition on=&quot;finish&quot; to=&quot;success&quot;/&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/WEB-INF/flows/embedded-flow/flow.xml" line="19"></p>
+<hr />
+<h2 id="end-state">End-State</h2>
+<p>The end-state represents the end of the flow. In the Embedded flow, there are two end-states: 'success' and 'cancel'. Each end-state is associated with a specific view (e.g., 'embeddedFlow/success' and 'embeddedFlow/cancel').</p>
+<pre><code class="xml">    &lt;end-state id=&quot;success&quot; view=&quot;embeddedFlow/success&quot;/&gt;
+
+    &lt;end-state id=&quot;cancel&quot; view=&quot;embeddedFlow/cancel&quot;/&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

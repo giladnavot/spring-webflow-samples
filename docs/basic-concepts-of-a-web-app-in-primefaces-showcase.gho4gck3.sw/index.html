@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Basic Concepts of a Web App in Primefaces-Showcase - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#web-app-configuration">Web App Configuration</a></li>
+        <li class="main "><a href="#spring-configuration">Spring Configuration</a></li>
+        <li class="main "><a href="#jsf-configuration">JSF Configuration</a></li>
+        <li class="main "><a href="#spring-web-flow-configuration">Spring Web Flow Configuration</a></li>
+        <li class="main "><a href="#web-application-endpoints">Web Application Endpoints</a></li>
+            <li><a href="#login-endpoint">/login Endpoint</a></li>
+            <li><a href="#home-endpoint">/home Endpoint</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>A Web app in the primefaces-showcase project refers to a Java-based web application. It is defined and configured using XML files located in the WEB-INF directory. These files include 'web.xml' which is the deployment descriptor of the application, 'beans.xml' for defining beans, 'faces-config.xml' for JSF configuration, and various other XML files for Spring and Web Flow configurations.</p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/web.xml" line="1"></p>
+<hr />
+<h1 id="web-app-configuration">Web App Configuration</h1>
+<p>This is the main configuration file for the web app. It defines the servlets, filters, listeners, and context parameters that are used by the application. It also specifies the welcome file for the application.</p>
+<pre><code class="xml">&lt;web-app xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;
+         version=&quot;3.0&quot;&gt;
+
+    &lt;!--
+        SPRING ROOT WEB APPLICATION CONTEXT
+    --&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;
+            /WEB-INF/spring/root-context.xml,
+            /WEB-INF/spring/servlet-context.xml
+        &lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/root-context.xml" line="1"></p>
+<hr />
+<h1 id="spring-configuration">Spring Configuration</h1>
+<p>This file is part of the Spring configuration. It is referenced in the web.xml file and is used to configure the Spring root application context.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;!-- Root Context: defines shared resources visible to all other web components --&gt;
+    &lt;import resource=&quot;security-config.xml&quot;/&gt;
+    &lt;import resource=&quot;servlet-context.xml&quot;/&gt;
+
+&lt;/beans&gt;
+
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/faces-config.xml" line="1"></p>
+<hr />
+<h1 id="jsf-configuration">JSF Configuration</h1>
+<p>This file is part of the JSF configuration. It is used to configure the JSF application, including the message bundle used for localization.</p>
+<pre><code class="xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;faces-config xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd&quot;
+        version=&quot;2.0&quot;&gt;
+
+    &lt;application&gt;
+        &lt;message-bundle&gt;JsfMessageResources&lt;/message-bundle&gt;
+    &lt;/application&gt;
+
+&lt;/faces-config&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/webflow.xml" line="6"></p>
+<hr />
+<h1 id="spring-web-flow-configuration">Spring Web Flow Configuration</h1>
+<p>This file is part of the Spring Web Flow configuration. It is used to configure the Spring Web Flow system, which handles the execution of flows within the application.</p>
+<pre><code class="xml">    xsi:schemaLocation=&quot;http://www.springframework.org/schema/webflow-config https://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/faces https://www.springframework.org/schema/faces/spring-faces.xsd&quot;&gt;
+
+    &lt;!-- Executes flows: the central entry point into the Spring Web Flow system --&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<h1 id="web-application-endpoints">Web Application Endpoints</h1>
+<p>Understanding Web Application Endpoints</p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="16"></p>
+<hr />
+<h2 id="login-endpoint">/login Endpoint</h2>
+<p>The <code>/login</code> endpoint is defined here. When a client makes a request to this URL, the application will display the login view. This is handled by the <code>UrlBasedViewResolver</code> in the servlet context, which resolves 'login' to <code>/WEB-INF/views/login.xhtml</code>.</p>
+<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/login&quot; /&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/spring/controllers.xml" line="18"></p>
+<hr />
+<h2 id="home-endpoint">/home Endpoint</h2>
+<p>The <code>/home</code> endpoint is defined here. When a client makes a request to this URL, the application will display the home view. This is also handled by the <code>UrlBasedViewResolver</code> in the servlet context, which resolves 'home' to <code>/WEB-INF/views/home.xhtml</code>.</p>
+<pre><code class="xml">    &lt;mvc:view-controller path=&quot;/home&quot; /&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

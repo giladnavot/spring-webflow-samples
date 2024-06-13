@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Exploring Plugins in Webflow Showcase - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#button-plugin">Button Plugin</a></li>
+        <li class="main "><a href="#rtl-plugin">RTL Plugin</a></li>
+        <li class="main "><a href="#link-icons-plugin">Link Icons Plugin</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>Plugins in the webflow-showcase project refer to additional sets of CSS stylesheets that enhance the functionality and aesthetics of the web application. They are located in the 'styles/blueprint/plugins' directory. Each plugin has its own directory, such as 'fancy-type', 'buttons', 'rtl', and 'link-icons', each containing a 'screen.css' file and a 'readme.txt' file. The 'screen.css' file contains the actual CSS rules that implement the plugin's functionality, while the 'readme.txt' provides additional information about the plugin.</p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/plugins/buttons/screen.css" line="1"></p>
+<hr />
+<h1 id="button-plugin">Button Plugin</h1>
+<p>The Button plugin provides styles for button elements. It includes different color schemes for different button states (hover, active), and for positive and negative actions.</p>
+<pre><code class="css">/* -------------------------------------------------------------- 
+
+   buttons.css
+   * Gives you some great CSS-only buttons.
+
+   Created by Kevin Hale [particletree.com]
+   * particletree.com/features/rediscovering-the-button-element
+
+   See Readme.txt in this folder for instructions.
+
+-------------------------------------------------------------- */
+
+a.button, button {
+  display:block;
+  float:left;
+  margin: 0.7em 0.5em 0.7em 0;
+  padding:5px 10px 5px 7px;   /* Links */
+
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/plugins/rtl/screen.css" line="1"></p>
+<hr />
+<h1 id="rtl-plugin">RTL Plugin</h1>
+<p>The RTL (Right-to-Left) plugin provides styles for supporting right-to-left languages. It mirrors the layout of the Blueprint grid system and adjusts the typography for right-to-left reading.</p>
+<pre><code class="css">/* --------------------------------------------------------------
+
+   rtl.css
+   * Mirrors Blueprint for left-to-right languages
+
+   By Ran Yaniv Hartstein [ranh.co.il]
+
+-------------------------------------------------------------- */
+
+body .container { direction: rtl; }
+body .column, body div.span-1, body div.span-2, body div.span-3, body div.span-4, body div.span-5, body div.span-6, body div.span-7, body div.span-8, body div.span-9, body div.span-10, body div.span-11, body div.span-12, body div.span-13, body div.span-14, body div.span-15, body div.span-16, body div.span-17, body div.span-18, body div.span-19, body div.span-20, body div.span-21, body div.span-22, body div.span-23, body div.span-24 {
+  float: right;
+  margin-right: 0;
+  margin-left: 10px;
+  text-align:right; 
+}
+
+body div.last { margin-left: 0; }
+body table .last { padding-left: 0; }
+
+body .append-1   { padding-right: 0; padding-left: 40px; }  
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/webflow-showcase/src/main/webapp/styles/blueprint/plugins/link-icons/screen.css" line="1"></p>
+<hr />
+<h1 id="link-icons-plugin">Link Icons Plugin</h1>
+<p>The Link Icons plugin provides styles for adding icons to links based on their protocol or file type. For example, external links get an external link icon, email links get an email icon, and links to PDF files get a PDF icon.</p>
+<pre><code class="css">/* -------------------------------------------------------------- 
+
+   link-icons.css
+   * Icons for links based on protocol or file type.
+
+   See the Readme file in this folder for additional instructions.
+
+-------------------------------------------------------------- */
+
+/* Use this class if a link gets an icon when it shouldn't. */
+body a.noicon { 
+    background:transparent none !important; 
+    padding:0 !important; 
+    margin:0 !important; 
+}
+
+/* Make sure the icons are not cut */
+a[href^=&quot;http:&quot;], a[href^=&quot;mailto:&quot;], a[href^=&quot;http:&quot;]:visited, 
+a[href$=&quot;.pdf&quot;], a[href$=&quot;.doc&quot;], a[href$=&quot;.xls&quot;], a[href$=&quot;.rss&quot;], 
+a[href$=&quot;.rdf&quot;], a[href^=&quot;aim:&quot;] {
+  padding:2px 22px 2px 0;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Understanding Entities in the Booking MVC Module - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#user-entity">User Entity</a></li>
+        <li class="main "><a href="#hotel-entity">Hotel Entity</a></li>
+        <li class="main "><a href="#booking-entity">Booking Entity</a></li>
+        <li class="main "><a href="#booking-service">Booking Service</a></li>
+        <li class="main "><a href="#jpa-booking-service">JPA Booking Service</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>Entities in the booking-mvc module of the spring-webflow-samples project refer to the data objects that are persisted in the database. They are annotated with the @Entity annotation, which marks the class as a JPA entity. Examples of entities in this project include the User, Hotel, and Booking classes. The User entity represents a user who can book hotels, the Hotel entity represents a hotel where users may book stays, and the Booking entity represents a hotel booking made by a user. These entities are used throughout the application, for example, in the JpaBookingService class for creating bookings, and in the SecurityConfig class for setting up in-memory user details for authentication.</p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/User.java" line="10"></p>
+<hr />
+<h1 id="user-entity">User Entity</h1>
+<p>The User entity represents a user of the application. It has properties for username, password, and name. It is annotated with @Entity, indicating that it is a JPA entity and should be mapped to a database table.</p>
+<pre><code class="java"> * A user who can book hotels.
+ */
+@Entity
+@Table(name = &quot;Customer&quot;)
+public class User implements Serializable {
+    private String username;
+
+    private String password;
+
+    private String name;
+
+    public User() {
+    }
+
+    public User(String username, String password, String name) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+    }
+
+    @Id
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/Hotel.java" line="11"></p>
+<hr />
+<h1 id="hotel-entity">Hotel Entity</h1>
+<p>The Hotel entity represents a hotel. It has properties for id, name, address, city, state, zip, country, and price. It is also annotated with @Entity.</p>
+<pre><code class="java">/**
+ * A hotel where users may book stays.
+ */
+@Entity
+public class Hotel implements Serializable {
+    private Long id;
+
+    private String name;
+
+    private String address;
+
+    private String city;
+
+    private String state;
+
+    private String zip;
+
+    private String country;
+
+    private BigDecimal price;
+
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/Booking.java" line="25"></p>
+<hr />
+<h1 id="booking-entity">Booking Entity</h1>
+<p>The Booking entity represents a booking made by a user for a hotel. It has properties for id, user, hotel, checkinDate, checkoutDate, creditCard, creditCardName, creditCardExpiryMonth, creditCardExpiryYear, smoking, beds, and amenities. It is also annotated with @Entity.</p>
+<pre><code class="java">/**
+ * A Hotel Booking made by a User.
+ */
+@Entity
+@BookingDateRange
+public class Booking implements Serializable {
+
+    private Long id;
+
+    private User user;
+
+    private Hotel hotel;
+
+    @DateTimeFormat(pattern = &quot;MM-dd-yyyy&quot;)
+    private Date checkinDate;
+
+    @DateTimeFormat(pattern = &quot;MM-dd-yyyy&quot;)
+    private Date checkoutDate;
+
+    private String creditCard;
+
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/BookingService.java" line="1"></p>
+<hr />
+<h1 id="booking-service">Booking Service</h1>
+<p>The BookingService interface defines the operations that can be performed on bookings. It includes methods to find bookings, find hotels, create bookings, persist bookings, and cancel bookings.</p>
+<pre><code class="java">package org.springframework.webflow.samples.booking;
+
+import java.util.List;
+
+/**
+ * A service interface for retrieving hotels and bookings from a backing repository. Also supports the ability to cancel
+ * a booking.
+ */
+public interface BookingService {
+
+    /**
+     * Find bookings made by the given user
+     * @param username the user's name
+     * @return their bookings
+     */
+    List&lt;Booking&gt; findBookings(String username);
+
+    /**
+     * Find hotels available for booking by some criteria.
+     * @param criteria the search criteria
+     * @return a list of hotels meeting the criteria
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-mvc/src/main/java/org/springframework/webflow/samples/booking/JpaBookingService.java" line="1"></p>
+<hr />
+<h1 id="jpa-booking-service">JPA Booking Service</h1>
+<p>The JpaBookingService class is a JPA-based implementation of the BookingService interface. It uses an EntityManager to perform the operations on the entities.</p>
+<pre><code class="java">package org.springframework.webflow.samples.booking;
+
+import java.util.List;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+/**
+ * A JPA-based implementation of the Booking Service. Delegates to a JPA entity manager to issue data access calls
+ * against the backing repository. The EntityManager reference is provided by the managing container (Spring)
+ * automatically.
+ */
+@Service(&quot;bookingService&quot;)
+@Repository
+public class JpaBookingService implements BookingService {
+
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

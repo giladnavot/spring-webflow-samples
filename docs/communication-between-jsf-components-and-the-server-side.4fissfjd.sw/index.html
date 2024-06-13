@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Communication between JSF Components and the Server Side - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#role-of-jsf-components">Role of JSF components</a></li>
+        <li class="main "><a href="#interaction-with-the-server-side">Interaction with the server side</a></li>
+        <li class="main "><a href="#data-flow-between-jsf-components-and-the-server">Data flow between JSF components and the server</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>This document will cover the process of how JSF components communicate with the server side in the Spring Web Flow application. The topics covered include:</p>
+<ol>
+<li>The role of JSF components in the application</li>
+<li>How JSF components interact with the server side</li>
+<li>The flow of data between JSF components and the server.</li>
+</ol>
+<p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/jsf/FacesHelper.java" line="7"></p>
+<hr />
+<h1 id="role-of-jsf-components">Role of JSF components</h1>
+<p>The <code>FacesHelper</code> class is a JSF component that is used to interact with the server side. It has a method <code>isError</code> which checks if there are any messages to display. This is an example of how JSF components can communicate with the server side.</p>
+<pre><code class="java">@Component
+public class FacesHelper {
+
+    /**
+     * This method can be used in a Facelets View to render a box around &lt;h:messages/&gt; conditionally.
+     * Note that this is only necessary with vanilla JSF. With PrimeFaces you can use &lt;p:messages/&gt;
+     * or &lt;p:growl&gt;.
+     * 
+     * @return true if there are messages to display
+     */
+    public boolean isError() {
+        return FacesContext.getCurrentInstance().getMessages().hasNext();
+    }
+
+}
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/java/org/springframework/samples/webflow/ajax/UserBean.java" line="1"></p>
+<hr />
+<h1 id="interaction-with-the-server-side">Interaction with the server side</h1>
+<p>The <code>UserBean</code> class is another example of a JSF component. It has a method <code>createEmailSuggestion</code> which interacts with the server side to create an email suggestion based on the user's first and last name.</p>
+<pre><code class="java">package org.springframework.samples.webflow.ajax;
+
+import java.io.Serializable;
+
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.util.StringUtils;
+import org.springframework.webflow.execution.RequestContext;
+
+public class UserBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String firstName;
+
+    private String lastName;
+
+    public String createEmailSuggestion(RequestContext context) {
+
+        boolean haveFirst = StringUtils.hasText(firstName);
+        boolean haveLast = StringUtils.hasLength(lastName);
+
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-faces/src/main/java/org/springframework/webflow/samples/booking/config/DispatcherServletInitializer.java" line="33"></p>
+<hr />
+<h1 id="data-flow-between-jsf-components-and-the-server">Data flow between JSF components and the server</h1>
+<p>The <code>onStartup</code> method in the <code>DispatcherServletInitializer</code> class sets up the JSF environment. It sets various parameters for the JSF context, such as the default suffix for JSF view templates and the refresh period for Facelets. This is an example of how data flows from the server side to the JSF components.</p>
+<pre><code class="java">    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+
+        // Use JSF view templates saved as *.xhtml, for use with Facelets
+        servletContext.setInitParameter(&quot;jakarta.faces.DEFAULT_SUFFIX&quot;, &quot;.xhtml&quot;);
+        // Enable special Facelets debug output during development
+        servletContext.setInitParameter(&quot;jakarta.faces.PROJECT_STAGE&quot;, &quot;Development&quot;);
+        // Causes Facelets to refresh templates during development
+        servletContext.setInitParameter(&quot;jakarta.faces.FACELETS_REFRESH_PERIOD&quot;, &quot;1&quot;);
+        // Declare Spring Security Facelets tag library
+        servletContext.setInitParameter(&quot;jakarta.faces.FACELETS_LIBRARIES&quot;, &quot;/WEB-INF/springsecurity.taglib.xml&quot;);
+
+        // Comment out if not using Mojarra
+        servletContext.addListener(com.sun.faces.config.ConfigureListener.class);
+
+        // Let the DispatcherServlet be registered
+        super.onStartup(servletContext);
+    }
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

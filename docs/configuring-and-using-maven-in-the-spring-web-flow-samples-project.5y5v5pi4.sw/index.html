@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Configuring and Using Maven in the Spring Web Flow Samples Project - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#project-information">Project Information</a></li>
+        <li class="main "><a href="#modules">Modules</a></li>
+        <li class="main "><a href="#properties">Properties</a></li>
+        <li class="main "><a href="#dependency-management">Dependency Management</a></li>
+        <li class="main "><a href="#repositories">Repositories</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>This document provides a detailed walkthrough of how Maven is configured and used in the Spring Web Flow Samples project.</p>
+<p><SwmSnippet path="/pom.xml" line="1"></p>
+<hr />
+<h1 id="project-information">Project Information</h1>
+<p>The <code>pom.xml</code> file starts with the project information. It specifies the model version, group ID, artifact ID, packaging type, name, and version of the project.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;org.springframework.webflow&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-webflow-samples&lt;/artifactId&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+    &lt;name&gt;Spring Web Flow Samples&lt;/name&gt;
+    &lt;version&gt;1.0.0.BUILD-SNAPSHOT&lt;/version&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/pom.xml" line="11"></p>
+<hr />
+<h1 id="modules">Modules</h1>
+<p>The <code>modules</code> section lists the modules that make up the project. Each module corresponds to a sub-project.</p>
+<pre><code class="xml">    &lt;modules&gt;
+        &lt;module&gt;booking-mvc&lt;/module&gt;
+        &lt;module&gt;booking-faces&lt;/module&gt;
+        &lt;module&gt;primefaces-showcase&lt;/module&gt;
+        &lt;!--
+        &lt;module&gt;webflow-showcase&lt;/module&gt;
+        --&gt;
+    &lt;/modules&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/pom.xml" line="20"></p>
+<hr />
+<h1 id="properties">Properties</h1>
+<p>The <code>properties</code> section defines versions of various dependencies and plugins used across the project. For example, the <code>jetty-maven-plugin.version</code> property is set to <code>11.0.11</code>.</p>
+<pre><code class="xml">    &lt;properties&gt;
+        &lt;easymock.version&gt;3.4&lt;/easymock.version&gt;
+        &lt;cdi-api&gt;4.0.1&lt;/cdi-api&gt;
+        &lt;hsqldb.version&gt;2.5.1&lt;/hsqldb.version&gt;
+        &lt;hibernate.version&gt;5.6.15.Final&lt;/hibernate.version&gt;
+        &lt;hibernate-validator.version&gt;8.0.0.Final&lt;/hibernate-validator.version&gt;
+        &lt;jaxb.version&gt;2.2.3&lt;/jaxb.version&gt;
+        &lt;jetty-maven-plugin.version&gt;11.0.11&lt;/jetty-maven-plugin.version&gt;
+        &lt;jsp-api.version&gt;3.1.0&lt;/jsp-api.version&gt;
+        &lt;jstl-api&gt;3.0.0&lt;/jstl-api&gt;
+        &lt;junit.version&gt;4.13.2&lt;/junit.version&gt;
+        &lt;log4j.version&gt;2.14.0&lt;/log4j.version&gt;
+        &lt;mojarra.version&gt;4.0.2&lt;/mojarra.version&gt;
+        &lt;myfaces.version&gt;4.0.0&lt;/myfaces.version&gt;
+        &lt;primefaces.version&gt;11.0.0&lt;/primefaces.version&gt;
+        &lt;servlet.version&gt;6.0.0&lt;/servlet.version&gt;
+        &lt;webflow.version&gt;3.0.0&lt;/webflow.version&gt;
+        &lt;weld.version&gt;5.0.0.Final&lt;/weld.version&gt;
+        &lt;maven-surefire-plugin.version&gt;2.22.2&lt;/maven-surefire-plugin.version&gt;
+    &lt;/properties&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/pom.xml" line="41"></p>
+<hr />
+<h1 id="dependency-management">Dependency Management</h1>
+<p>The <code>dependencyManagement</code> section is used to provide a centralized place to define and manage the versions of dependencies. It helps to avoid specifying versions in the child POMs.</p>
+<pre><code class="xml">    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-framework-bom&lt;/artifactId&gt;
+                &lt;version&gt;6.0.10&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-security-bom&lt;/artifactId&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+                &lt;version&gt;6.0.2&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+                &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+                &lt;version&gt;2.0.6&lt;/version&gt;
+            &lt;/dependency&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/pom.xml" line="65"></p>
+<hr />
+<h1 id="repositories">Repositories</h1>
+<p>The <code>repositories</code> section is used to specify the repositories from where the project dependencies are to be downloaded. In this case, the Spring Snapshot Repository and Spring Milestone Repository are used.</p>
+<pre><code class="xml">    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;spring-snapshot&lt;/id&gt;
+            &lt;name&gt;Spring Snapshot Repository&lt;/name&gt;
+            &lt;url&gt;https://repo.spring.io/snapshot&lt;/url&gt;
+        &lt;/repository&gt;
+        &lt;repository&gt;
+            &lt;id&gt;spring-milestone&lt;/id&gt;
+            &lt;name&gt;Spring Milestone Repository&lt;/name&gt;
+            &lt;url&gt;https://repo.spring.io/milestone&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

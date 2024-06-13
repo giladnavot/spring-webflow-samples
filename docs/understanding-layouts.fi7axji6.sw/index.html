@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Understanding Layouts - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#layout-file-structure">Layout File Structure</a></li>
+        <li class="main "><a href="#using-the-layout">Using the Layout</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>Layouts in the <code>primefaces-showcase/src/main/webapp/WEB-INF/layouts</code> directory refer to the structure and arrangement of visual elements in the application. They define the overall appearance of the application and how the components are organized and interact with each other. The <code>standard.xhtml</code> file, for example, is a layout file that defines the standard structure of a page in the application, including the head and body sections, and placeholders for inserting specific content.</p>
+<p><SwmSnippet path="/primefaces-showcase/src/main/webapp/WEB-INF/layouts/standard.xhtml" line="1"></p>
+<hr />
+<h1 id="layout-file-structure">Layout File Structure</h1>
+<p>This is an example of a layout file in the application. It defines the common structure of the pages, including the head and body sections. The <code>&lt;ui:insert&gt;</code> tags are placeholders where unique content will be inserted for each page.</p>
+<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+    xmlns:h=&quot;http://java.sun.com/jsf/html&quot;
+    xmlns:f=&quot;http://java.sun.com/jsf/core&quot;
+    xmlns:ui=&quot;http://java.sun.com/jsf/facelets&quot;
+    xmlns:p=&quot;http://primefaces.org/ui&quot;&gt;
+&lt;f:view contentType=&quot;text/html&quot;&gt;
+&lt;h:head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    &lt;title&gt;JSF 2, Spring Web Flow, and PrimeFaces Showcase&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;${request.contextPath}/app/resources/styles/blueprint/screen.css&quot; type=&quot;text/css&quot; media=&quot;screen, projection&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;${request.contextPath}/app/resources/styles/blueprint/print.css&quot; type=&quot;text/css&quot; media=&quot;print&quot; /&gt;
+    &lt;!--[if lt IE 8]&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;${request.servletPath}/styles/blueprint/ie.css&quot; type=&quot;text/css&quot; media=&quot;screen, projection&quot; /&gt;
+    &lt;![endif]--&gt;
+    &lt;ui:insert name=&quot;headIncludes&quot;/&gt;
+&lt;/h:head&gt;
+&lt;h:body&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div&gt;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<h1 id="using-the-layout">Using the Layout</h1>
+<p>To use this layout in a page, you would use the <code>&lt;ui:composition&gt;</code> tag and specify the layout file as the template. Then, within the <code>&lt;ui:define&gt;</code> tags, you would specify the unique content for that page, matching the names of the <code>&lt;ui:insert&gt;</code> tags in the layout file.</p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

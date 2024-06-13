@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Hotel Counting Process - JPMC Demo</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">JPMC Demo</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#invoking-the-count-function-in-hotellazydatamodel">Invoking the count function in HotelLazyDataModel</a></li>
+        <li class="main "><a href="#retrieving-the-number-of-hotels-from-the-jpabookingservice">Retrieving the number of hotels from the JpaBookingService</a></li>
+        <li class="main "><a href="#forming-the-search-pattern">Forming the search pattern</a></li>
+        <li class="main "><a href="#extracting-the-search-string-from-the-searchcriteria">Extracting the search string from the SearchCriteria</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>This document will cover the process of counting hotels in the booking system, which includes:</p>
+<ol>
+<li>Invoking the count function in HotelLazyDataModel</li>
+<li>Retrieving the number of hotels from the JpaBookingService</li>
+<li>Forming the search pattern</li>
+<li>Extracting the search string from the SearchCriteria.</li>
+</ol>
+<pre><code class="mermaid">graph TD;
+subgraph booking-faces/src/main/java/org/springframework/webflow/samples/booking
+  count:::mainFlowStyle --&gt; getNumberOfHotels
+end
+subgraph booking-faces/src/main/java/org/springframework/webflow/samples/booking
+  getNumberOfHotels:::mainFlowStyle --&gt; getSearchPattern
+end
+subgraph booking-faces/src/main/java/org/springframework/webflow/samples/booking
+  getSearchPattern:::mainFlowStyle --&gt; getSearchString
+end
+  getSearchString:::mainFlowStyle --&gt; ...
+
+classDef mainFlowStyle color:#000000,fill:#7CB9F4
+classDef rootsStyle color:#000000,fill:#00FFF4
+classDef Style1 color:#000000,fill:#00FFAA
+classDef Style2 color:#000000,fill:#FFFF00
+classDef Style3 color:#000000,fill:#AA7CB9
+</code></pre>
+
+<p><SwmSnippet path="/booking-faces/src/main/java/org/springframework/webflow/samples/booking/HotelLazyDataModel.java" line="1" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
+<hr />
+<h1 id="invoking-the-count-function-in-hotellazydatamodel">Invoking the count function in HotelLazyDataModel</h1>
+<p>The count function in HotelLazyDataModel initiates the process of counting hotels. It calls the getNumberOfHotels function in JpaBookingService.</p>
+<pre><code class="java">package org.springframework.webflow.samples.booking;
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-faces/src/main/java/org/springframework/webflow/samples/booking/JpaBookingService.java" line="57" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
+<hr />
+<h1 id="retrieving-the-number-of-hotels-from-the-jpabookingservice">Retrieving the number of hotels from the JpaBookingService</h1>
+<p>The getNumberOfHotels function retrieves the number of hotels based on the search criteria. It forms a search pattern and executes a query to count the hotels that match the pattern.</p>
+<pre><code class="java">    @Transactional(readOnly = true)
+    public int getNumberOfHotels(SearchCriteria criteria) {
+        String pattern = getSearchPattern(criteria);
+        Long count = (Long) em
+                .createQuery(
+                        &quot;select count(h.id) from Hotel h where lower(h.name) like :pattern or lower(h.city) like :pattern &quot;
+                                + &quot;or lower(h.zip) like :pattern or lower(h.address) like :pattern&quot;)
+                                .setParameter(&quot;pattern&quot;, pattern).getSingleResult();
+        return count.intValue();
+    }
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-faces/src/main/java/org/springframework/webflow/samples/booking/JpaBookingService.java" line="94" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
+<hr />
+<h1 id="forming-the-search-pattern">Forming the search pattern</h1>
+<p>The getSearchPattern function forms a search pattern based on the search string in the criteria. If the search string is present, it is converted to lower case and any '*' characters are replaced with '%'. If the search string is not present, the pattern is set to '%'.</p>
+<pre><code class="java">    // helpers
+
+    private String getSearchPattern(SearchCriteria criteria) {
+        if (StringUtils.hasText(criteria.getSearchString())) {
+            return &quot;%&quot; + criteria.getSearchString().toLowerCase().replace('*', '%') + &quot;%&quot;;
+        } else {
+            return &quot;%&quot;;
+        }
+    }
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p><SwmSnippet path="/booking-faces/src/main/java/org/springframework/webflow/samples/booking/SearchCriteria.java" line="28" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q="></p>
+<hr />
+<h1 id="extracting-the-search-string-from-the-searchcriteria">Extracting the search string from the SearchCriteria</h1>
+<p>The getSearchString function simply returns the search string from the SearchCriteria object.</p>
+<pre><code class="java">    public String getSearchString() {
+        return searchString;
+    }
+</code></pre>
+
+<hr />
+<p></SwmSnippet></p>
+<p>&nbsp;</p>
+<p><em>This is an auto-generated document by Swimm AI 🌊 and has not yet been verified by a human</em></p>
+<p><SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBc3ByaW5nLXdlYmZsb3ctc2FtcGxlcyUzQSUzQWdpbGFkbmF2b3Q=" repo-name="spring-webflow-samples"><sup>Powered by <a href="https://app.swimm.io/">Swimm</a></sup></SwmMeta></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
